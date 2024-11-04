@@ -155,7 +155,7 @@ def reduce(
     def red(x: List[float]) -> float:
         answer = init
         for x_i in x:
-            answer = f(init, x_i)
+            answer = f(answer, x_i)
         return answer
 
     return red
