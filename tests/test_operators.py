@@ -24,8 +24,10 @@ from minitorch.operators import (
     relu_back,
     sigmoid,
     log,
-    exp
+    exp,
 )
+
+import random
 
 from .strategies import assert_close, small_floats
 
@@ -126,28 +128,36 @@ def test_transitive(a: float, b: float, c: float) -> None:
 
 
 @pytest.mark.task0_2
-def test_symmetric(a: float, b: float) -> None:
+def test_symmetric() -> None:
     """Write a test that ensures that :func:`minitorch.operators.mul` is symmetric, i.e.
     gives the same value regardless of the order of its input.
     """
+
+    a = random.random()
+    b = random.random()
 
     assert mul(a, b) == mul(b, a)
 
 
 @pytest.mark.task0_2
-def test_distribute(a: float, b: float, c: float) -> None:
+def test_distribute() -> None:
     r"""Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
+
+    a = random.random()
+    b = random.random()
+    c = random.random()
 
     assert_close(mul(a, add(b, c)), add(mul(a, b), mul(a, c)))
 
 
 @pytest.mark.task0_2
-def test_other(a: float) -> None:
+def test_other() -> None:
     """Write a test that ensures some other property holds for your functions."""
 
-    if a > 1e-7 and a < 1e7:
+    a = random.random()
+    if a > 1e-7:
         assert_close(log(exp(a)), a)
 
 
