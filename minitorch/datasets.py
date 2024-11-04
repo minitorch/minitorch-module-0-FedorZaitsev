@@ -4,7 +4,8 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 
-def make_pts(N):
+def make_pts(N: int) -> List[Tuple[float, float]]:
+    """Sample N random points"""
     X = []
     for i in range(N):
         x_1 = random.random()
@@ -21,6 +22,7 @@ class Graph:
 
 
 def simple(N):
+    """Create data simply divisible by a vertical line"""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -30,6 +32,7 @@ def simple(N):
 
 
 def diag(N):
+    """Create data divisible by a diagonal"""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -39,6 +42,7 @@ def diag(N):
 
 
 def split(N):
+    """Create data with two vertical clusters of first class"""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -48,6 +52,7 @@ def split(N):
 
 
 def xor(N):
+    """Create data with four chess order labeled quarter planes"""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -57,6 +62,7 @@ def xor(N):
 
 
 def circle(N):
+    """Create data with positive labels in the circle"""
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -67,19 +73,31 @@ def circle(N):
 
 
 def spiral(N):
+    """Create data with labels attributed in spiral"""
 
     def x(t):
         return t * math.cos(t) / 20.0
 
     def y(t):
         return t * math.sin(t) / 20.0
-    X = [(x(10.0 * (float(i) / (N // 2))) + 0.5, y(10.0 * (float(i) / (N //
-        2))) + 0.5) for i in range(5 + 0, 5 + N // 2)]
-    X = X + [(y(-10.0 * (float(i) / (N // 2))) + 0.5, x(-10.0 * (float(i) /
-        (N // 2))) + 0.5) for i in range(5 + 0, 5 + N // 2)]
+
+    X = [
+        (x(10.0 * (float(i) / (N // 2))) + 0.5, y(10.0 * (float(i) / (N // 2))) + 0.5)
+        for i in range(5 + 0, 5 + N // 2)
+    ]
+    X = X + [
+        (y(-10.0 * (float(i) / (N // 2))) + 0.5, x(-10.0 * (float(i) / (N // 2))) + 0.5)
+        for i in range(5 + 0, 5 + N // 2)
+    ]
     y2 = [0] * (N // 2) + [1] * (N // 2)
     return Graph(N, X, y2)
 
 
-datasets = {'Simple': simple, 'Diag': diag, 'Split': split, 'Xor': xor,
-    'Circle': circle, 'Spiral': spiral}
+datasets = {
+    "Simple": simple,
+    "Diag": diag,
+    "Split": split,
+    "Xor": xor,
+    "Circle": circle,
+    "Spiral": spiral,
+}
