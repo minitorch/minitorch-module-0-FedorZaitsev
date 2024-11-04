@@ -31,13 +31,13 @@ class Module:
 
     def train(self) -> None:
         """Set the mode of this module and all descendent modules to `train`."""
-        training = True
+        self.training = True
         for _, mod in self._modules.items():
             mod.train()
 
     def eval(self) -> None:
         """Set the mode of this module and all descendent modules to `eval`."""
-        training = False
+        self.training = False
         for _, mod in self._modules.items():
             mod.eval()
 
@@ -55,7 +55,7 @@ class Module:
 
         for submodule_name, submodule in self._modules.items():
             for param_name, param in submodule.named_parameters():
-                params.append((submodule_name + param_name, param))
+                params.append((submodule_name + "." + param_name, param))
 
         return params
 
