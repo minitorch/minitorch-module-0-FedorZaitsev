@@ -86,7 +86,7 @@ def sigmoid(a: float) -> float:
 
 def relu(a: float) -> float:
     """ReLU"""
-    return a * (x > 0)
+    return a * (a > 0)
 
 
 def log(a: float) -> float:
@@ -144,7 +144,7 @@ def zipWith(
     f: Callable[[float, float], float],
 ) -> Callable[[List[float], List[float]], List[float]]:
     """Zip function with lists of arguments"""
-    return lambda x, y: [f(x[i], y[i]) for i in range(max(len(x), len(y)))]
+    return lambda x, y: [f(x[i], y[i]) for i in range(len(x))]
 
 
 def reduce(
@@ -166,7 +166,7 @@ def negList(x: List[float]) -> List[float]:
     return map(neg)(x)
 
 
-def addList(x: List[float], y: List[float]) -> List[float]:
+def addLists(x: List[float], y: List[float]) -> List[float]:
     """List addition"""
     return zipWith(add)(x, y)
 
